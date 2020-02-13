@@ -1,10 +1,15 @@
+
+
+
+
 module.exports = function(RED) {
+
     function CanvasRectangleNode(config) {
         RED.nodes.createNode(this,config);
         var node = this;
+const { createCanvas, loadImage } = require('canvas');
         node.on('input', function(msg) {
-            			
-			const { createCanvas, loadImage } = require('canvas');
+			
 			const canvas = createCanvas(200, 200);
 			const ctx = canvas.getContext('2d');
 
@@ -26,6 +31,7 @@ module.exports = function(RED) {
 			loadImage('/home/pi/.node-red/node_modules/node-red-dashboard/dist/CameraImages/frame.png').then((image) => {
 				ctx.drawImage(image, 50, 0, 70, 70);
 				msg.payload =  canvas.toDataURL();
+				
 			});
 		
             node.send(msg);

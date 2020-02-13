@@ -1,10 +1,7 @@
 {
     "name": "node-red-contrib-canvas-rectangle-node",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "To draw rectangle(s) on image",
-    "dependencies": {
-        "canvas": "^2.6.1"
-    },
     "keywords": [
         "canvas",
         "image",
@@ -16,9 +13,7 @@
         }
     },
     "contributors": [],
-    "devDependencies": {
-        "node-red": "^1.0.3",
-        "node-red-node-test-helper": "^0.2.3",
-        "standard": "^14.3.1"
+    "dependencies": {
+        "canvas": "^2.6.1"
     }
 }
