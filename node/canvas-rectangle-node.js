@@ -6,13 +6,20 @@ module.exports = function (RED) {
 		const { createCanvas, loadImage } = require('canvas');
 		node.on('input', function (msg) {
 
-			const canvas = createCanvas(200, 200);
-			const ctx = canvas.getContext('2d');
+			
 
-			// Write "Hello Word!"
+			// Draw cat with lime helmet
+			loadImage('/home/pi/.node-red/node_modules/node-red-dashboard/dist/CameraImages/frame.png').then((image) => {
+			
+			var width = parseInt(image.width);
+			var height = parseInt(image.height);
+			const canvas = createCanvas(width,height);
+			const ctx = canvas.getContext('2d');
+			ctx.drawImage(image, 0, 0, width,height);
+			// Write "Hello World!"
 			ctx.font = '30px Impact';
 			ctx.rotate(0);
-			ctx.fillText('Hello Word!', 50, 100);
+			ctx.fillText('Hello World!', 50, 100);
 
 			// Draw Basic Rectangle
 			ctx.beginPath();
@@ -22,31 +29,14 @@ module.exports = function (RED) {
 			ctx.lineWidth = 3;
 			ctx.strokeStyle = 'yellow';
 			ctx.stroke();
+				
 
-			// Draw cat with lime helmet
-			loadImage('/home/pi/.node-red/node_modules/node-red-dashboard/dist/CameraImages/frame.png').then((image) => {
-				ctx.drawImage(image, 50, 0, 70, 70);
-
-				const imageBase64 = canvas.toDataURL();
-				const imgLength = imageBase64.length;
-				nOfLoop = parseInt(imgLength / 100) + (imgLength % 100 > 0 ? 1 : 0);
-
-				let payload = "";
-				for (let index = 0; index < nOfLoop; index++) {
-
-					maxIndex = (index * 100) + 100;
-					if (maxIndex > imgLength) {
-						maxIndex = imgLength;
-					}
-					payload = payload + imageBase64.substring(index * 100, maxIndex);
-
-				}
-
-				msg.payload = payload;
+				msg.payload = canvas.toDataURL('image/png', 0.5).split('base64,')[1].toString();
+				node.send(msg);
 
 			});
 
-			node.send(msg);
+			
 		});
 	}
 	RED.nodes.registerType("canvas-rectangle-node", CanvasRectangleNode);
