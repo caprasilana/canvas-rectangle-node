@@ -3,7 +3,8 @@
         category: 'canvas',
         color: '#5499C7',
         defaults: {
-            name: {value:""}
+            name: {value:""},
+            imagePath: {value:""},
         },
         inputs:1,
         outputs:1,
@@ -19,6 +20,10 @@
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-imagePath"><i class="fa fa-globe"></i> Image Path</label>
+        <input type="text" id="node-input-imagePath" placeholder="e.g. /home/pi/image.png">
     </div>
 </script>
 
