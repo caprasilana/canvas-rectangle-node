@@ -9,30 +9,31 @@
                 required: true
             },
             width: {
-                value: 0, 
+                value: 0,
                 validate: RED.validators.number()
             },
             height: {
-                value: 0, 
+                value: 0,
                 validate: RED.validators.number()
             },
             offset_x: {
-                value: 0, 
+                value: 0,
                 validate: RED.validators.number()
             },
             offset_y: {
-                value: 0, 
+                value: 0,
                 validate: RED.validators.number()
             },
             title: { value: "" },
-            inputs: 1,
-            outputs: 1,
-            paletteLabel: "canvas rectangle",
-            //  icon: "file.png",
-            label: function () {
-                return this.name || "canvas-rectangle-node";
-            }
-        });
+        },
+        inputs: 1,
+        outputs: 1,
+        paletteLabel: "canvas rectangle",
+        //  icon: "file.png",
+        label: function () {
+            return this.name || "canvas-rectangle-node";
+        }
+    });
 </script>
 
 <script type="text/html" data-template-name="canvas-rectangle-node">
