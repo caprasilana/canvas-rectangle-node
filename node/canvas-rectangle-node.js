@@ -7,9 +7,15 @@ module.exports = function (RED) {
 		RED.nodes.createNode(this, config);
 
 		// set properties
-		this.imagePath = config.imagePath
-		const node = this
+		this.imagePath = config.imagePath;
+		this.width = config.width;
+		this.height = config.height;
+		this.offset_x = config.offset_x;
+		this.offset_y = config.offset_y;
+		this.title = config.title;
 
+		const node = this
+		const lineWidth = 3;
 		const { createCanvas, loadImage } = require('canvas');
 
 		// register a listener to the 'input' event
@@ -25,22 +31,22 @@ module.exports = function (RED) {
 				const ctx = canvas.getContext('2d');
 				ctx.drawImage(image, 0, 0, width, height);
 
-				// Write "Hello World!"
-				ctx.font = '30px Impact';
-				ctx.rotate(0);
-				ctx.fillText('Hello World!', 50, 100);
+				if (node.width > 0 && node.height > 0) {
+					if (node.title) {
+						// Write "Hello World!"
+						ctx.font = '30px Impact';
+						ctx.rotate(0);
+						ctx.fillText(node.title, node.offset_x, node.offset_y - lineWidth);
+					}
+					// Draw Basic Rectangle
+					ctx.beginPath();
+					ctx.rect(node.offset_x, node.offset_y, node.width, node.height);
+					ctx.lineWidth = lineWidth;
+					ctx.strokeStyle = 'yellow';
+					ctx.stroke();
+				}
 
-				// Draw Basic Rectangle
-				ctx.beginPath();
-				ctx.rect(188, 50, 200, 100);
-				//context.fillStyle = 'yellow';
-				//context.fill();
-				ctx.lineWidth = 3;
-				ctx.strokeStyle = 'yellow';
-				ctx.stroke();
-
-
-				msg.payload = canvas.toDataURL('image/png', 0.5).split('base64,')[1].toString();
+				msg.payload = canvas.toDataURL('image/png').split('base64,')[1].toString();
 				node.send(msg);
 
 			});
