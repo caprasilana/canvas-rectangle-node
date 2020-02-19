@@ -25,13 +25,37 @@ module.exports = function (RED) {
 			// Draw cat with lime helmet
 			loadImage(node.imagePath).then((image) => {
 
+				// get Image dimension
 				var width = parseInt(image.width);
 				var height = parseInt(image.height);
+
+				// generate canvas and fill with image
 				const canvas = createCanvas(width, height);
 				const ctx = canvas.getContext('2d');
 				ctx.drawImage(image, 0, 0, width, height);
 
-				if (node.width > 0 && node.height > 0) {
+				// check if msg.payload is from tensorFlow
+				if (msg.payload && Array.isArray(msg.payload) && msg.payload.[0] && Array.isArray(msg.payload[0].bbox)) {
+					msg.payload.forEach(function (element) {
+
+						// get rounded score
+						const score = (Math.round(element.score * 100))
+						if (element.class) {
+							// Write tensorFlow Class + score
+							ctx.font = '30px Impact';
+							ctx.rotate(0);
+							ctx.fillText(element.class + ' ' + score + "%",
+								element.bbox[0], element.bbox[1] - lineWidth);
+						}
+						// Draw Basic Rectangle
+						ctx.beginPath();
+						ctx.rect(element.bbox[0], element.bbox[1], element.bbox[2], element.bbox[3]);
+						ctx.lineWidth = lineWidth;
+						ctx.strokeStyle = score >= 90 ? 'green' : (score >= 75 ? 'yellow' : 'red');
+						ctx.stroke();
+					});
+				}
+				else if (node.width > 0 && node.height > 0) {
 					if (node.title) {
 						// Write "Hello World!"
 						ctx.font = '30px Impact';
