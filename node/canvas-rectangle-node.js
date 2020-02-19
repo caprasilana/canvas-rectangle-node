@@ -35,7 +35,7 @@ module.exports = function (RED) {
 				ctx.drawImage(image, 0, 0, width, height);
 
 				// check if msg.payload is from tensorFlow
-				if (msg.payload && Array.isArray(msg.payload) && msg.payload.[0] && Array.isArray(msg.payload[0].bbox)) {
+				if (msg.payload && Array.isArray(msg.payload) && msg.payload[0] && Array.isArray(msg.payload[0].bbox)) {
 					msg.payload.forEach(function (element) {
 
 						// get rounded score
