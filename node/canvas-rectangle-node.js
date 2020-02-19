@@ -39,11 +39,13 @@ module.exports = function (RED) {
 					msg.payload.forEach(function (element) {
 
 						// get rounded score
-						const score = (Math.round(element.score * 100))
+						const score = (Math.round(element.score * 100));
+						const color = score >= 90 ? 'lightgreen' : (score >= 75 ? 'yellow' : 'red');
 						if (element.class) {
 							// Write tensorFlow Class + score
 							ctx.font = '30px Impact';
 							ctx.rotate(0);
+							ctx.fillStyle = color;
 							ctx.fillText(element.class + ' ' + score + "%",
 								element.bbox[0], element.bbox[1] - lineWidth);
 						}
@@ -51,7 +53,7 @@ module.exports = function (RED) {
 						ctx.beginPath();
 						ctx.rect(element.bbox[0], element.bbox[1], element.bbox[2], element.bbox[3]);
 						ctx.lineWidth = lineWidth;
-						ctx.strokeStyle = score >= 90 ? 'green' : (score >= 75 ? 'yellow' : 'red');
+						ctx.strokeStyle =color ;
 						ctx.stroke();
 					});
 				}
