@@ -27,10 +27,10 @@ module.exports = function (RED) {
 			// If this node is installed in Node-RED 0.x, it will need to
 			// fallback to using `node.send`
 			send = send || function () { node.send.apply(node, arguments) }
-
+			this.log("Start");
 			// Draw cat with lime helmet
 			loadImage(node.imagePath).then((image) => {
-
+				this.log("Image Loaded");
 				// get Image dimension
 				var width = parseInt(image.width);
 				var height = parseInt(image.height);
@@ -45,7 +45,7 @@ module.exports = function (RED) {
 					msg.payload[0].bbox && Array.isArray(msg.payload[0].bbox) &&
 					msg.payload[0].score && msg.payload[0].class) {
 					msg.payload.forEach(function (element) {
-
+						this.log("tensorflow Input");
 						// get rounded score
 						const score = (Math.round(element.score * 100));
 						color = score >= 90 ? 'lightgreen' : (score >= 75 ? 'yellow' : 'red');
@@ -66,10 +66,10 @@ module.exports = function (RED) {
 					});
 				}
 				else if (node.width > 0 && node.height > 0) {
-
+					this.log("Start Rectangle");
 					// check if offset is inside image
 					if (node.offset_x < width && node.offset_y < height) {
-
+						this.log("Offset in frame");
 						// calculate if rectangle will be inside image 
 						const rectWidth = node.offset_x + node.width > width ? width - node.offset_x : node.width;
 						const rectHeight = ode.offset_y + node.height > height ? height - node.offset_y : node.height;
