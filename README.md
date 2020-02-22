@@ -90,3 +90,7 @@ The image will be processed by the `canvas-rectangle-node` node and the output w
 ![flow](images/flow.png)
 
 
+## License
+
+This code pattern is licensed under the Apache License, Version 2. Separate third-party code objects invoked within this code pattern are licensed by their respective providers pursuant to their own separate licenses.
+
