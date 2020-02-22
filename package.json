@@ -2,10 +2,13 @@
     "name": "node-red-contrib-canvas-rectangle-node",
     "version": "0.0.2",
     "description": "To draw rectangle(s) on image",
+    "author": "Caprasilana",
+    "license": "Apache-2.0",
     "keywords": [
         "canvas",
         "image",
-        "rectangle"
+        "rectangle",
+        "node-red"
     ],
     "node-red": {
         "nodes": {
@@ -15,5 +18,9 @@
     "contributors": [],
     "dependencies": {
         "canvas": "^2.6.1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/caprasilana/canvas-rectangle-node.git"
     }
 }
