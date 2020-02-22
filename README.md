@@ -60,7 +60,7 @@ Be sure to restart Node-RED if it was already running when installing this way.
 
 ### 3. Import the Node-RED flow
 
-Once installed the node can be added and used in the flow of your Node-RED application. To import the flows available in this repo:
+Once installed the node can be added and used in the flow of your Node-RED application. To import the flow available in this repo:
 
 1. Make sure Node-RED is running
 1. Open a browser and go to your Node-RED Editor
@@ -72,6 +72,7 @@ Once installed the node can be added and used in the flow of your Node-RED appli
 1. Select **Import to new flow**
 1. Click **Import**
 
+To execute the flow node-red-dashboard is required in your palette
 ### 4. Deploy the Node-RED flow
 
 From the Node-RED editor, do the following:
@@ -82,6 +83,10 @@ From the Node-RED editor, do the following:
 
 The image will be processed by the `canvas-rectangle-node` node and the output will be displayed in the **Dashboard** panel.
 
+## Output
 
+#### flow
+
+![flow](images/flow.png)
 
 

@@ -71,14 +71,37 @@
     <p>A simple node that add rectangle(s) over the input image</p>
     <h3>Inputs</h3>
     <dl class="message-properties">
-    <dt>payload
-        <span class="property-type">string | buffer</span>
+    <dt>Edit Dialog
+        <span class="property-type">string</span>
     </dt>
-    <h3>Outputs</h3>
+    <dd> In the Edit dialog you can fill all input. </dd>
+    <dt>payload
+        <span class="property-type">Array of Object</span>
+    </dt>
+    <dd> the payload of the message to publish. </dd>
+
+    
+    <h3>Output</h3>
        <dl class="message-properties">
        <dt>payload
            <span class="property-type">string | buffer</span>
        </dt>
-   <h3>Details</h3>
-   <p>Some more information about the node.</p>
+       <dd> Image result in base64 </dd>
+       <h3>Details</h3>
+       <p><code>msg.payload</code> is used if you have a tfjs object detection output before.
+        The input in this case will be a Array of JSON like 
+        {
+            bbox: [offset x, offsety, width, height],
+            class: text,
+            score: number
+        }
+        
+        otherwhise you can use the edit dialog to fill all data.
+        
+        Image Path is mandatory.</p>
+   
+   <h3>References</h3>
+       <ul>
+           <li><a href="https://github.com/caprasilana/canvas-rectangle-node">GitHub </a> - the nodes github repository for canvas-rectangle-node</li>
+       </ul>
 </script>

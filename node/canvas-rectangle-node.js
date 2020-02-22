@@ -71,12 +71,13 @@ module.exports = function (RED) {
 					if (node.offset_x < width && node.offset_y < height) {
 
 						// calculate if rectangle will be inside image 
-						const rectWidth = node.offset_x + node.width > width ? width - node.offset_x : node.width;
-						const rectHeight = node.offset_y + node.height > height ? height - node.offset_y : node.height;
+						const rectWidth = (node.offset_x + node.width) > width ? width - node.offset_x : node.width;
+						const rectHeight = (node.offset_y + node.height) > height ? height - node.offset_y : node.height;
 
 						if (node.title) {
 							// Write title from node input
 							ctx.font = font;
+							ctx.fillStyle = color;
 							ctx.rotate(0);
 							ctx.fillText(node.title, node.offset_x, node.offset_y - lineWidth);
 						}
